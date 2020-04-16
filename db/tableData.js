@@ -43,7 +43,7 @@ function writeTable(tblArr) {
 
 // };
 
-module.exports = tableArray;
+module.exports.tb = tableArray;
 
 module.exports.writeTable = writeTable;
 

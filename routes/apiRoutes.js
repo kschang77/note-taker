@@ -20,8 +20,8 @@ module.exports = function (app) {
 
   app.get("/api/notes", function (req, res) {
     console.log("api route GET /api/notes called ", req.originalUrl)
-    res.json(tableData);
-    console.log("Table Data", tableData)
+    res.json(tableData.tb);
+    console.log("Table Data", tableData.tb)
   });
 
 
@@ -32,15 +32,15 @@ module.exports = function (app) {
   // then item will be written to file
   //---------------------------------------------------------
 
-  // yet to be impleted!!!!!!!
   app.post("/api/notes", function (req, res) {
     console.log("api route POST /api/notes called ", req.body)
     var r = req.body;
     r.id = (nextID++).toString()
     console.log("Note assigned ID = ", r.id)
-    tableData.push(r);
-    tableData.writeTable(tableData)
-    res.json(true);
+    tableData.tb.push(r);
+    tableData.writeTable(tableData.tb)
+    res.json(r);
+    console.log("Note assigned ID = ", r)
   });
 
   // ----------------------------------------------------------
@@ -60,21 +60,22 @@ module.exports = function (app) {
     var delId = req.params.id
     var tableData2
     console.log("api route DELETE /api/notes/:id called ", delId)
-    tableData2 = arrayRemove(tableData, delId);
+    tableData2 = arrayRemove(tableData.tb, delId);
     console.log("TableData =", tableData2)
     tableData.writeTable(tableData2)
-    tableData = tableData2
+    tableData.tb = tableData2
+    res.json({ message: `If Note ${delId} is there, it was deleted` })
   });
 
   // this part is debug code and probably doesn't work
   // will think about complete later
-  app.delete("/api/notes/deleteall", function (req, res) {
-    // Empty out the arrays of data
-    // tableData.length = [];
-    // waitListData.length = [];
+  // app.delete("/api/notes/deleteall", function (req, res) {
+  // Empty out the arrays of data
+  // tableData.length = [];
+  // waitListData.length = [];
 
-    // res.json({ ok: true });
-  });
+  // res.json({ ok: true });
+  // });
 };
 
 
