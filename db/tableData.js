@@ -21,7 +21,14 @@ try {
   console.error("readFileSync or JSON.parse failed, db.json not loaded ", e)
 }
 // }
-// var nextID = tableArray.length;
+var nextID = "";
+for (i = 0; i < tableArray.length; i++) {
+  if (nextID < tableArray[i].id) {
+    nextID = tableArray[i].id
+  }
+}
+nextID++;
+
 
 // // writetable -- write the tableArray[] to db.json
 function writeTable(tblArr) {
@@ -36,6 +43,8 @@ function writeTable(tblArr) {
 
 // };
 
-module.exports = tableArray
+module.exports = tableArray;
 
-module.exports.writeTable = writeTable
+module.exports.writeTable = writeTable;
+
+module.exports.nextID = nextID;

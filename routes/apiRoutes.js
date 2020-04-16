@@ -4,7 +4,7 @@
 // These data sources hold arrays of information on table-data, waitinglist, etc.
 // ============================================================
 var tableData = require("../db/tableData");
-// var nextID
+var nextID = tableData.nextID
 
 // =============================================================
 // ROUTING
@@ -35,7 +35,7 @@ module.exports = function (app) {
   app.post("/api/notes", function (req, res) {
     console.log("api route POST /api/notes called ", req.body)
     var r = req.body;
-    r.id = (tableData.length).toString()
+    r.id = (nextID++).toString()
     console.log("Note assigned ID = ", r.id)
     tableData.push(r);
     tableData.writeTable(tableData)
@@ -48,6 +48,7 @@ module.exports = function (app) {
 
   // yet to be implemented!!!!!!
   app.delete("/api/notes/:id", function (req, res) {
+    console.log("api route DELETE /api/notes/:id called ", req.body)
 
 
 
