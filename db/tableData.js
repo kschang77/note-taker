@@ -21,10 +21,10 @@ try {
   console.error("readFileSync or JSON.parse failed, db.json not loaded ", e)
 }
 // }
-var nextID = "";
+var nextID = 0;
 for (i = 0; i < tableArray.length; i++) {
-  if (nextID < tableArray[i].id) {
-    nextID = tableArray[i].id
+  if (nextID < parseInt(tableArray[i].id)) {
+    nextID = parseInt(tableArray[i].id)
   }
 }
 nextID++;
