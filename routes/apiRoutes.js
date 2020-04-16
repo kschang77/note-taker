@@ -6,6 +6,7 @@
 var tableData = require("../db/tableData");
 var nextID = tableData.nextID
 
+console.log("NextID = ", nextID)
 // =============================================================
 // ROUTING
 // =============================================================
@@ -46,14 +47,23 @@ module.exports = function (app) {
   // API DELETE Requests
   // need note ID, confirms, deletes, rewrite updated db.json
 
-  // yet to be implemented!!!!!!
+  // utility function to remove array element if id=value
+  function arrayRemove(arr, value) {
+    return arr.filter(
+      function (ele) {
+        return ele.id != value;
+      });
+  }
+
+  // DELETE function just needs parameter of ID
   app.delete("/api/notes/:id", function (req, res) {
-    console.log("api route DELETE /api/notes/:id called ", req.body)
-
-
-
-
-
+    var delId = req.params.id
+    var tableData2
+    console.log("api route DELETE /api/notes/:id called ", delId)
+    tableData2 = arrayRemove(tableData, delId);
+    console.log("TableData =", tableData2)
+    tableData.writeTable(tableData2)
+    tableData = tableData2
   });
 
   // this part is debug code and probably doesn't work
