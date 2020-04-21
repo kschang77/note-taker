@@ -12,6 +12,8 @@
 
 ### ✨ [Demo](https://kc-note-taker.herokuapp.com/)
 
+![Demo GIF](./note-taker.gif)
+
 ### Internals
 
 As requested, only Create, Read, and Delete functions were implemented. There is no authenticiation, and minimal error-checking. 
